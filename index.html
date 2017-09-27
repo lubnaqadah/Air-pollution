@@ -1,0 +1,126 @@
+<!DOCTYPE HTML">
+<html>
+
+	<head>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Clean Air Project</title>
+		<link rel="shortcut icon" href="assets/images/740c9b78f13b8bdf0d67c51df29b98af.ico.png" type="image/x-icon"> 
+		<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="assets/css/ammap.css" type="text/css" media="all" />
+	</head>
+
+	<body>
+
+		<div class="container">
+			<div class="header clearfix">
+				<h1>AIR POLLUTION PROJECT</h1>
+			</div>
+
+			<hr>
+
+			<div class="jumbotron">
+				<div class="container">
+					<form action="get">
+						<input type="text" id="keyWord"  placeholder="Search for your city.." autocomplete="on" list="citiesList" >
+						<datalist id="citiesList"> />
+							<option value="Kansas City" />
+							<option value="San Antonio" />
+							<option value="los angeles-long beach-santa ana<" />
+							<option value="Tampa-St. Petersburg-Clearwater" />
+							<option value="Minneapolis-St. Paul-Bloomington" />
+							<option value="NEW YORK" />
+							<option value="Atlanta-Sandy Springs-Marietta" />
+							<option value="Seattle-Tacoma-Bellevue" />
+							<option value="El Bosque" />
+							<option value="Osasco" />
+							<option value="Delhi" />
+							<option value="South East Queensland" />
+							<option value="Jakarta" />
+							<option value="Chengdu" />
+							<option value="Ulaanbaatar" />
+							<option value="ALBERTA" />
+							<option value="London" />
+							<option value="Lisboa" />
+							<option value="Oost-Vlaanderen" />
+							<option value="Středočeský" />
+							<option value="Brandenburg" />
+							<option value="Oslo" />
+							<option value="Roma" />
+							<option value="Moscow" />
+							<option value="İstanbul" />
+							<option value="Bogota" />
+						</datalist>
+						<button type="submit" id="submit">Search</button>
+					</form>
+
+					<div id="mapdiv">
+					</div> 
+					<h4>World Map</h4>
+				</div>
+			</div>
+
+			<hr>
+
+
+			<div class="container">
+				<div class="row">
+
+					<div class="col-md-6">
+						<h3>Air Pollutants</h3> 
+						<ul class="list-group">
+							<li class="list-group-item">CO = Carbon Dioxide <br> (Colorless, odorless gas)</li>
+							<li class="list-group-item">NO2 = Nitrogen Dioxide <br>(Unstable triatomic form of Oxygen)</li>
+							<li class="list-group-item">03 = Ozone <br> (Harmful to air quality, outside of ozone layer)</li>
+							<li class="list-group-item">PM = Particle Matter <br> (Solid & liquid particles suspended in air which are hazardous)</li>
+						</ul>
+					</div>
+					<!-- Firebase Here --> 
+
+					<div class="panel-body col-md-6">
+						<h3>Zoom Data History</h3>
+						<table class="table" id="zoom-data">
+							<thead class="header">
+								<tr>
+									<th>Country Name</th>
+									<th>Air Quality Ranking</th>
+								</tr>
+							</thead>
+
+							<tbody id="tbody">
+
+
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+
+				<hr>
+
+
+			</div>
+		</div> 
+
+		<hr>
+
+		<footer>
+			<div class="container">
+				Copyright &copy; 2017 UCSD Coding Bootcamp
+				<p>Team Members: Alex, Lubna & Steph</p>
+			</div>
+		</footer>
+
+
+
+	</body>
+	<script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://www.amcharts.com/lib/3/ammap.js"></script>
+	<script type="text/javascript" src="assets/javascript/countries.js"></script>
+	<script type="text/javascript" src="assets/javascript/light.js"></script>
+	<script type="text/javascript" src="assets/javascript/worldHigh.js"></script>
+
+</html>
+
