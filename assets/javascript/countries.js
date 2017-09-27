@@ -248,7 +248,7 @@ var database = firebase.database();
 
 
 var cityAQ = 0;
-var queryURL = "http://api.airvisual.com//v2/city_ranking?key=7nsRkFTrepCQ4LCmX";
+var queryURL = "https://api.airvisual.com//v2/city_ranking?key=7nsRkFTrepCQ4LCmX";
 
 $.ajax({
 	url: queryURL,
