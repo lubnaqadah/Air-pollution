@@ -350,10 +350,12 @@ var secondAPI = function(input){
 var retrieve = function(){
 	database.ref().on("child_added", function(snapshot) {
 		country = snapshot.val().country;
+		city = snapshot.val().city;
 		cityAQ = snapshot.val().cityAQ;
 
 		var row = $("<tr>");
-		row.append("<td>" + country + "</td>");
+		row.append("<td>" + country+ "</td>");
+		row.append("<td>" + city + "</td>");
 		row.append("<td>" + cityAQ + "</td>");
 
 		$("#tbody").append(row);

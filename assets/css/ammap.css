@@ -13,10 +13,6 @@ p {
 	margin: 10px;
 }
 
-footer {
-	font-size: 12px;
-	text-align: right;
-}
 
 .header {
 	text-align: center;
@@ -29,7 +25,7 @@ footer {
 
 #mapdiv {
 	width: 100%; 
-	background-color: #e6e6e6; 
+	background-color: #9DCEBD; 
 	height: 500px;"
 }
 
@@ -51,18 +47,17 @@ footer {
 
 .col-md-6 {
 	margin-bottom: 20px;
-	font-size: .7em;
+	font-size: .9em;
 	max-height: 300px;
-	overflow: auto;
-}
-
-#{
-	
+	overflow:auto;
 }
 
 
 .list-group-item {
 	text-align: center;
+	border: none;
+	border-bottom: solid 1px #DCDCDC;
+	border-top: solid 1px #DCDCDC;
 }
 
 #citiesList {
@@ -75,10 +70,6 @@ footer {
 	margin-top: 5px;
 }
 
-#myUl li {
-	
-	display: none
-}
 
 #keyWord{
 	border: solid .5px #e4d393;
@@ -103,9 +94,12 @@ input::-webkit-calendar-picker-indicator {
 
 footer{
 	background-color: #5F8F75;
-	font-size: .5em;
+	font-size: .6em;
 	text-align: center;
 	height: 60px;
 	padding-top: 20px
 	
+}
+thead{
+	font-weight: 800;
 }
