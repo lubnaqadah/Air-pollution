@@ -1,3 +1,7 @@
+body{
+	font-size: 1em
+}
+
 h1 {
 	text-align: center;
 	margin: 20px;
@@ -19,13 +23,13 @@ p {
 }
 
 .jumbotron {
-	background-color: #9DCEBD;
+	background-color: #d3e8e6;
 	padding: 10px
 }
 
 #mapdiv {
 	width: 100%; 
-	background-color: #9DCEBD; 
+	background-color: #d3e8e6; 
 	height: 500px;"
 }
 
@@ -102,4 +106,11 @@ footer{
 }
 thead{
 	font-weight: 800;
+	font-size: 1em
+}
+
+
+
+#myModal{
+	text-align: left;
 }

@@ -1,25 +1,25 @@
 var cities = ["Kansas City", "San Antonio","Los Angeles-Long Beach-Santa Ana","Tampa-St. Petersburg-Clearwater", "Minneapolis-St. Paul-Bloomington","NEW YORK","Atlanta-Sandy Springs-Marietta", "Seattle-Tacoma-Bellevue","El Bosque", "Osasco", "Delhi", "South East Queensland", "Jakarta", "Chengdu", "Ulaanbaatar", "ALBERTA", "London", "Lisboa", "Oost-Vlaanderen", "Středočeský", "Brandenburg", "Oslo", "Roma", "Moscow", "İstanbul", "Bogota" ];
 
 var des, images = [], input ;
-;
-
 
 var countriesList = [
 
 	{
 		id: "Toronto Downtown",
 		value: 0,
-		description: "hello ima description"
+		info: "CA"
 	},
 
 	{
 		id: "Beijing",
-		value: 0
+		value: 0,
+		info: "CN"
 	},
 
 	{
 		id: "Chengdu",
-		value: 0
+		value: 0,
+		info: "CN"
 	},
 
 
@@ -30,12 +30,14 @@ var countriesList = [
 
 	{
 		id: "Tehran",
-		value: 0
+		value: 0,
+		info: "IR"
 	},
 
 	{
 		id: "Ulaanbaatar",
-		value: 0
+		value: 0,
+		info: "MN"
 	}, 
 
 	{
@@ -60,12 +62,13 @@ var countriesList = [
 
 	{
 		id: "Warsaw",
-		value: 0
+		value: 0,
+		info: "PL"
 	},
 
 	{
 		id: "Kolkata",
-		value: 0
+		value: 0	
 	},
 
 	{
@@ -85,38 +88,46 @@ var countriesList = [
 
 	{
 		id: "Munich",
-		value: 0
+		value: 0,
+		info: "DE"
 	},
 
 	{
 		id: "Moscow",
-		value: 0
+		value: 0,
+		info: "RU"
 	},
 
 	{
 		id: "London",
-		value: 0
+		value: 0,
+		info: "GB"
 	},
 
 
 	{
 		id: "Santiago",
-		value: 0
+		value: 0,
+		info: "CL"
 	},
 
 	{
 		id: "Sao Paulo",
-		value: 0
+		value: 0,
+		info: "BR"
 	},
 
 	{
 		id: "Nice",
-		value: 0
+		value: 0,
+		info: "FR"
 	},
 
 	{
 		id: "Los Angeles",
-		value: 0
+		value: 0,
+		info: "US"
+	
 	},
 
 	{
@@ -131,12 +142,14 @@ var countriesList = [
 
 	{
 		id: "Sydney",
-		value: 0
+		value: 0,
+		info: "AU"
 	},
 
 	{
 		id: "Madrid",
-		value: 0
+		value: 0,
+		info: "ES"
 	},
 
 	{
@@ -191,7 +204,8 @@ var countriesList = [
 
 	{
 		id: "Port Harcourt",
-		value: 0
+		value: 0,
+		info: "NG"
 	},
 
 	{
@@ -225,8 +239,9 @@ var countriesList = [
 	},
 
 	{
-		id: "Beograd",
-		value: 0
+		id: "Roma",
+		value: 0,
+		info: "IT"
 	}
 
 ];
@@ -263,15 +278,11 @@ $.ajax({
 		var hold = response.data[i];
 		var city = hold.city;
 		var state = hold.state;
-		//		console.log(response);
+	
 		for (var j = 0; j < countriesList.length; j++) {
 			if (city === countriesList[j].id){
 				countriesList[j].value = response.data[i].ranking.current_aqi;
-				//				database.ref().push({
-				//					country: response.data[i].country,
-				//					cityAQ: response.data[i].ranking.current_aqi
-				//				});
-
+	
 			};
 
 			if (state === countriesList[j].id){
@@ -284,8 +295,13 @@ $.ajax({
 });
 
 
+var des;
+
 function render() {
-	AmCharts.makeChart("mapdiv", {
+
+	var countryImages = [];
+
+	var map = new AmCharts.makeChart("mapdiv", {
 		type: "map",
 		theme: "light",
 		colorSteps: 10,
@@ -298,17 +314,59 @@ function render() {
 		},
 
 		areasSettings: {
-			autoZoom: true
+			autoZoom: true,
+			selectable: true
 		},
+
+		listeners:  [ {
+   		event: "clickMapObject",
+    	method: function(event) {
+    		var countryImages =[];
+
+  			 var queryURL = "https://api.openaq.org/v1/measurements?country=" + event.mapObject.info + "&sort=asc&limit=10";
+    		$.ajax({
+    			url: queryURL,
+    			method: "GET"
+    		}).done(function(response) {
+    			console.log(response);
+     			console.log("click registered");
+					
+			for (var z = 0; z < response.results.length; z ++){
+				var parameter = response.results[z].parameter;
+				var value = response.results[z].value;
+				var unit = response.results[z].unit; 
+				des = (parameter + " = " + value +" " + unit );
+
+					var box = new Object();
+					box.label = "";
+					box.title = response.results[z].city;
+					box.latitude = response.results[z].coordinates.latitude;
+					box.longitude = response.results[z].coordinates.longitude;
+					box.type = "circle";
+					box.alpha = 0.7;
+					box.scale= 0.9;
+					box.selectable = false;		
+					box.description = des;
+					images.push(box);
+
+					// images.concat(countryImages);
+			};
+
+					console.log(box);
+ 	
+    		});
+
+    	}
+		} ],
 
 		valueLegend: {
 			right: 10,
 			minValue: "Healthy",
 			maxValue: "Hazardous"
 		}
-
-	});
+		});
 };
+
 
 var secondAPI = function(input){
 	var queryURL = "https://api.openaq.org/v1/latest?city=" + input;
@@ -336,7 +394,7 @@ var secondAPI = function(input){
 		box.selectable = true;		
 		box.description = des;
 		images.push(box);
-		//			console.log(box);
+
 
 		render();
 
@@ -369,10 +427,17 @@ retrieve();
 
 
 $("#submit").on("click" , function(event){
-	event.preventDefault();
-	input = $("#keyWord").val();
-	var inputIndex = cities.indexOf(input);
+    event.preventDefault();
+    input = $("#keyWord").val();
+    var inputIndex = cities.indexOf(input);
+    
+    secondAPI(cities[inputIndex]);
+    render();
+    $("#keyWord").val("");
+    
+    if (inputIndex == -1 && input.length != 0 ){
+         // show an error to the user
+        $('#myModal').modal("show")
+    }
+});
 
-	secondAPI(cities[inputIndex]);
-	$("#keyWord").val("");
-})
